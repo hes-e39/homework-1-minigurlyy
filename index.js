@@ -41,14 +41,15 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
   // filter by complementary color (ignore case)
 if(compName) {
   filteredColors = filteredColors.filter(function (color) {
-    return color.complementaryColor && color.complementaryColor.name.toLowerCase().includes(compName.toLowerCase());
+    return color.comp && color.comp.some(compColor => compColor.name.toLowerCase().includes(compName.toLowerCase()));
+    // return color.complementaryColor && color.complementaryColor.name.toLowerCase().includes(compName.toLowerCase());
   });
 }
 
   // filter by complementary color hex code (WITHOUT #)
   if(compHex) {
     filteredColors = filteredColors.filter(function (color) {
-      return color.complementaryColor && color.complementaryColor.hex.toLowerCase() === compHex.toLowerCase();
+      return color.comp && color.comp.some(compColor => compColor.hex.toLowerCase() === compHex.toLowerCase());
     });
   }
 
